@@ -11,6 +11,7 @@ from level import level
 
 from sprite import sprite_sheet
 from level import level
+from player import player
 from tile import *
 
 
@@ -105,6 +106,10 @@ class game:
 
             t = tile(WORLD_MAP, sprite_sheet("assets/textures/wall_sprites.png", sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 10))
             t.draw_map()
+
+            p = player(100, 100)
+            p.input()
+            p.draw_player()
                 
             self.blit_draw()
 
