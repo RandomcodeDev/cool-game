@@ -36,7 +36,7 @@ class game:
     clock: pygame.time.Clock
 
     # Drawing area
-    draw: pygame.Surface
+    surface: pygame.Surface
 
     def __init__(self):
         pygame.init()
@@ -55,7 +55,7 @@ class game:
         
         self.fullscreen = False
         
-        self.draw = pygame.Surface((self.fullscreen_width, self.fullscreen_height))
+        self.surface = pygame.Surface((self.fullscreen_width, self.fullscreen_height))
 
         pygame.display.set_caption("Shitty Game")
         self.clock = pygame.time.Clock()
@@ -77,7 +77,7 @@ class game:
             x = 0
             y = self.screen.get_height() / 2 - height / 2   
             
-        scaled = pygame.transform.smoothscale(self.draw, (width, height))
+        scaled = pygame.transform.scale(self.surface, (width, height))
         self.screen.blit(scaled, (x, y))
 
     def toggle_fullscreen(self):
@@ -102,20 +102,23 @@ class game:
                     if event.key == pygame.K_F11:
                         self.toggle_fullscreen()
 
-            self.draw.fill("black")
+            self.surface.fill("black")
 
             t = tile(WORLD_MAP, sprite_sheet("assets/textures/wall_sprites.png", sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 10))
             t.draw_map()
 
-            p = player(100, 100)
-            p.input()
-            p.draw_player()
+            globals.player.input()
+            globals.player.draw_player()
                 
             self.blit_draw()
 
             pygame.display.update()
             self.clock.tick()
 
+# Start all the things
 if __name__ == "__main__":
     globals.game = game()
+    
+    globals.player = player(100, 100)
+    
     globals.game.run()

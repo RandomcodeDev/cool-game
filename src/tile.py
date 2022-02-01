@@ -38,7 +38,7 @@ class tile:
         else:
             self.sprites = sprites
 
-        self.display_surface = globals.game.draw
+        self.display_surface = globals.game.surface
 
     def draw_map(self):
         for row_num,row in enumerate(self.map):

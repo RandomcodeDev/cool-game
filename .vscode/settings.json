@@ -1,3 +1,8 @@
 {
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false,
+    "[python]":{
+        "editor.tabSize": 4,
+    }
 }
