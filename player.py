@@ -1,5 +1,6 @@
-from turtle import speed
 import pygame
+
+import globals
 
 class player:
     SPEED = 1
@@ -7,7 +8,8 @@ class player:
         self.x = x
         self.y = y
         self.sprite = None # put player sprite sheet direct here
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = globals.game.draw
+        self.rect = pygame.Rect(x, y, 64, 64)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -23,4 +25,4 @@ class player:
             self.x -= player.SPEED
 
     def draw_player(self):
-        pygame.draw.rect(self.display_surface, (255,255,255), (self.x , self.y, 64, 64))
+        pygame.draw.rect(self.display_surface, (255,255,255), self.rect)
