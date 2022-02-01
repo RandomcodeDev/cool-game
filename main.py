@@ -5,6 +5,7 @@ from pygame.locals import *
 
 from settings import *
 from level import Level
+from tile import *
 
 
 class Game:
@@ -31,9 +32,12 @@ class Game:
                     if event.key == pygame.K_F11:
                         # toggle fullscreen
                         pass
-                self.screen.fill("black")
-                pygame.display.update()
-                self.clock.tick(FPS)
+
+            self.screen.fill("black")
+            t = tile(WORLD_MAP)
+            t.draw_map()
+            pygame.display.update()
+            self.clock.tick(FPS)
 
 
 if __name__ == "__main__":
