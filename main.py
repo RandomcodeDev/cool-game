@@ -9,9 +9,13 @@ from pygame.locals import *
 from anim import animation
 from level import level
 from settings import *
+<<<<<<< HEAD
 
 from sprite import sprite_sheet
 from level import level
+=======
+from level import Level
+>>>>>>> c32998a45dc525023df96e9eb4f750327904ca0a
 from tile import *
 
 
