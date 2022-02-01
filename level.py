@@ -1,5 +1,5 @@
 #import pygame
 
-class Level:
+class level:
     def __init__(self):
         pass
