@@ -1,5 +1,8 @@
-import pygame, sys
+import sys
+
+import pygame
 from pygame.locals import *
+
 from settings import *
 from level import Level
 
@@ -8,7 +11,12 @@ class Game:
     def __init__(self):
 
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+
+        display_info = pygame.display.Info()
+        width = display_info.current_w * 0.5
+        height = display_info.current_h * 0.5
+
+        self.screen = pygame.display.set_mode((width, height), pygame.RESIZABLE)
         pygame.display.set_caption("Main")
         self.clock = pygame.time.Clock()
 
@@ -23,7 +31,6 @@ class Game:
                     if event.key == pygame.K_F11:
                         # toggle fullscreen
                         pass
-
                 self.screen.fill("black")
                 pygame.display.update()
                 self.clock.tick(FPS)
