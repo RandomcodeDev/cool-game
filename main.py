@@ -2,12 +2,17 @@ import sys
 
 import pygame
 
+import globals
+
 from pygame.locals import *
 
 from anim import animation
 from level import level
 from settings import *
+
 from sprite import sprite_sheet
+from level import level
+from tile import *
 
 
 class game:
@@ -47,9 +52,6 @@ class game:
                 int(self.screen.get_width() * 0.5625),
             )
         )
-        print(
-            f"screen size: {self.screen.get_size()}\ndraw size: {self.draw.get_size()}"
-        )
         self.draw.fill("black")
 
     def blit_draw(self):
@@ -79,17 +81,17 @@ class game:
                     if event.key == pygame.K_F11:
                         self.toggle_fullscreen()
 
-                self.screen.fill("black")
-                self.refresh_size()
+            self.screen.fill("black")
+            self.refresh_size()
 
-                self.draw.fill("white")
+            t = tile(WORLD_MAP)
+            t.draw_map()
                 
-                self.blit_draw()
+            self.blit_draw()
 
-                pygame.display.update()
-                self.clock.tick(FPS)
-
+            pygame.display.update()
+            self.clock.tick(FPS)
 
 if __name__ == "__main__":
-    g = game()
-    g.run()
+    globals.game = game()
+    globals.game.run()

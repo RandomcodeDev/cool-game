@@ -1,5 +1,7 @@
 import pygame
 
+import globals
+
 WORLD_MAP = [
 ['l','b','r'],
 ['l',',','r'],
@@ -17,7 +19,7 @@ class tile:
     def __init__(self, map):
         self.map = map
 
-        self.display_surface = pygame.display.get_surface()
+        self.display_surface = globals.game.draw
 
     def draw_map(self):
         for row_num,row in enumerate(self.map):

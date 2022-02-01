@@ -2,6 +2,7 @@ import pygame
 
 from typing import Tuple
 
+
 class sprite_sheet:
     """Allows for individual images to be retrieved from a singular strip of images"""
 
@@ -9,7 +10,7 @@ class sprite_sheet:
     sprite_count: int  # The number of sprites
     sprite_size: Tuple[int, int]  # The size of the sprites
     vertical: bool  # Whether the image is a vertical or horizontal set of sprites
-    distance: int # Number of pixels separating sprites
+    distance: int  # Number of pixels separating sprites
     __sprite__: pygame.Surface  # The current sprite
 
     def __init__(
@@ -47,12 +48,14 @@ class sprite_sheet:
 
         # If the sprite count is 0, calculate it automatically
         if sprite_count == 0:
-            self.sprite_count = (
-                    if self.vertical:
-                	self.image.get_height() // (self.sprite_size[1] + self.distance)
-                else:
-                        self.image.get_width() // (self.sprite_size[0] + self.distance)
-            )
+            if self.vertical:
+                self.sprite_count = self.image.get_height() // (
+                    self.sprite_size[1] + self.distance
+                )
+            else:
+                self.sprite_count = self.image.get_width() // (
+                    self.sprite_size[0] + self.distance
+                )
         else:
             self.sprite_count = sprite_count
 
@@ -61,11 +64,17 @@ class sprite_sheet:
 
         if self.vertical:
             area = pygame.Rect(
-                0, (self.sprite_size[1] + self.distance) * key, self.sprite_size[0], self.sprite_size[1]
+                0,
+                (self.sprite_size[1] + self.distance) * key,
+                self.sprite_size[0],
+                self.sprite_size[1],
             )
         else:
             area = pygame.Rect(
-                (self.sprite_size[1] + self.distance) * key, 0, self.sprite_size[0], self.sprite_size[1]
+                (self.sprite_size[1] + self.distance) * key,
+                0,
+                self.sprite_size[0],
+                self.sprite_size[1],
             )
 
         self.__sprite__.blit(self.image, (0, 0), area)
