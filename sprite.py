@@ -1,6 +1,6 @@
 import pygame
 
-from typing import AnyStr, Tuple
+from typing import AnyStr, Tuple, Union
 
 
 class sprite_sheet:
@@ -15,7 +15,7 @@ class sprite_sheet:
 
     def __init__(
         self,
-        image: (AnyStr | pygame.Surface),
+        image: Union[AnyStr, pygame.Surface],
         sprite_count: int = 0,
         sprite_size: Tuple[int, int] = (16, 16),
         distance: int = 0,

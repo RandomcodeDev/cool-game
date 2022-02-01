@@ -2,7 +2,7 @@ import pygame
 
 import globals
 
-from typing import AnyStr, List
+from typing import AnyStr, List, Union
 
 from sprite import sprite_sheet
 
@@ -31,7 +31,7 @@ class tile:
     sprites: sprite_sheet # Sprite sheet to get tiles from
     display_surface: pygame.Surface # Surface to draw to
 
-    def __init__(self, map: List[List[str]], sprites: (AnyStr | sprite_sheet)):
+    def __init__(self, map: List[List[str]], sprites: Union[AnyStr, sprite_sheet]):
         self.map = map
         if type(sprites) == str:
             self.sprites = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 10)
