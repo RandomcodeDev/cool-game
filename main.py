@@ -34,7 +34,7 @@ class game:
     # Clock
     clock: pygame.time.Clock
 
-    # Drawing area (1920x1080)
+    # Drawing area
     draw: pygame.Surface
 
     def __init__(self):
@@ -46,7 +46,7 @@ class game:
 
         self.screen = pygame.display.set_mode(
             (self.fullscreen_width * 0.5, self.fullscreen_height * 0.5),
-            pygame.RESIZABLE,
+            pygame.RESIZABLE, vsync=1
         )
         
         self.width = self.screen.get_width()
@@ -60,8 +60,11 @@ class game:
         self.clock = pygame.time.Clock()
 
     def blit_draw(self):
-        width = int(self.screen.get_height() * 1.77777778)
-        height = int(self.screen.get_width() * 0.5625)
+        width = self.screen.get_width()
+        height = int(width * 0.5625)
+        if height > self.screen.get_height():
+            width = self.screen.get_height() * 1.7777778
+            height = self.screen.get_height()
         
         if self.screen.get_size() == width:
             x = 0
@@ -71,20 +74,20 @@ class game:
             y = 0
         else:
             x = 0
-            y = self.screen.get_height() / 2 - height / 2
+            y = self.screen.get_height() / 2 - height / 2   
             
         scaled = pygame.transform.smoothscale(self.draw, (width, height))
         self.screen.blit(scaled, (x, y))
 
     def toggle_fullscreen(self):
         if self.fullscreen:
-            self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
+            self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE, vsync=1)
             self.fullscreen = False
         else:
-            display_info = pygame.display.Info()
-            self.width = display_info.current_w
-            self.height = display_info.current_h
-            self.screen = pygame.display.set_mode((self.fullscreen_width, self.fullscreen_height), pygame.FULLSCREEN)
+            size = pygame.display.get_window_size()
+            self.width = size[0]
+            self.height = size[1]
+            self.screen = pygame.display.set_mode((self.fullscreen_width, self.fullscreen_height), pygame.FULLSCREEN | pygame.RESIZABLE, vsync=1)
             self.fullscreen = True
 
     def run(self):
@@ -106,7 +109,7 @@ class game:
             self.blit_draw()
 
             pygame.display.update()
-            self.clock.tick(60)
+            self.clock.tick()
 
 if __name__ == "__main__":
     globals.game = game()
