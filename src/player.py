@@ -25,8 +25,8 @@ class player:
 
 	def __init__(self, x, y):
 		self.display_surface = globals.game.surface
-		self.size = (64, 64)
-		self.sprite = sprite_sheet("assets/textures/player.png", sprite_size = self.size)
+		self.sprite = sprite_sheet("assets/textures/player.png")
+		self.size = self.sprite[0].get_size()
 		self.x = x
 		self.y = y
 		self.speed = 5

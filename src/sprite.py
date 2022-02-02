@@ -17,7 +17,7 @@ class sprite_sheet:
 		self,
 		image: Union[AnyStr, pygame.Surface],
 		sprite_count: int = 0,
-		sprite_size: Tuple[int, int] = (16, 16),
+		sprite_size: Tuple[int, int] = (128, 128),
 		distance: int = 0,
 		vertical: bool = False,
 		offset_pos: Tuple[int, int] = (0, 0),
