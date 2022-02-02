@@ -38,7 +38,7 @@ class tile:
 	def __init__(self, map: List[List[str]], sprites: AnyStr):
 		self.map = map
 		self.wall_sprites = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20)
-		self.ground_sprites = sprite_sheet(sprites, sprite_count=5, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20, offset_pos=(0, 148))
+		self.ground_sprites = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20, offset_pos=(0, 148))
 
 		self.display_surface = globals.game.surface
 
@@ -65,8 +65,7 @@ class tile:
 					self.display_surface.blit(pygame.transform.flip(self.wall_sprites[2], True, False), (x, y))
 				elif column == tile.EMPTY:
 					pass
-<<<<<<< HEAD
-				
+ 
 	def draw_ground(self):
 		x = 0
 		y = 0
@@ -82,16 +81,3 @@ class tile:
 			GROUND_MAP.append([])
 			for j in range(self.display_surface.get_width() // tile.TILESIZE):
 				GROUND_MAP[i].append(random.randint(0, len(self.ground_sprites) - 1))
-=======
-
-	def draw_ground(self):
-		x: int = 0
-		y: int = 0
-		for i in range(self.display_surface.get_height()/128):
-			for i in range(self.display_surface.get_width()/128):
-				random = random.randint(0,2)
-				self.display_surface.blit("""put sprite here"""[random],(x, y))
-				x += tile.TILESIZE
-
-			y += tile.TILESIZE
->>>>>>> tonkoopman
