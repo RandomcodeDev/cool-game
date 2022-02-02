@@ -29,7 +29,7 @@ class player:
 		self.sprite = sprite_sheet("assets/textures/player.png", sprite_size = self.size)
 		self.x = x
 		self.y = y
-		self.speed = 1
+		self.speed = 5
 
 	def input(self):
 		keys = pygame.key.get_pressed()
