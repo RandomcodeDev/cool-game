@@ -9,9 +9,14 @@ from typing import AnyStr, List, Union
 from sprite import sprite_sheet
 
 WORLD_MAP = [
-['tl','b','tr'],
-['ls',',','rs'],
-['bl','f','br']
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',','fp',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',','],
+[',',',',',',',',',',',',',',',',',',',',',',',',',',',',',']
 ]
 
 GROUND_MAP = []
@@ -28,7 +33,8 @@ class tile:
 	LEFT_SIDE: str = 'ls'
 	RIGHT_SIDE: str = 'rs'
 	EMPTY: str = ','
-	PLAYER: str = 'p'
+	FULL_PILLAR: str = 'fp'
+	BROKEN_PILLAR: str = 'bp'
 	TILESIZE: int = 128
 
 	map: List[List[str]] # List of tiles to use
@@ -39,6 +45,7 @@ class tile:
 		self.map = map
 		self.wall_sprites = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20)
 		self.ground_sprites = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20, offset_pos=(0, 148))
+		self.pillar = sprite_sheet(sprites, sprite_size = (tile.TILESIZE, tile.TILESIZE), distance = 20, offset_pos=(0, 296))
 
 		self.display_surface = globals.game.surface
 
@@ -63,21 +70,26 @@ class tile:
 					self.display_surface.blit(self.wall_sprites[2], (x, y))
 				elif column == tile.RIGHT_SIDE:
 					self.display_surface.blit(pygame.transform.flip(self.wall_sprites[2], True, False), (x, y))
+				elif column == tile.FULL_PILLAR:
+					self.display_surface.blit(self.pillar[0], (x, y))
 				elif column == tile.EMPTY:
 					pass
  
 	def draw_ground(self):
-		x = 0
-		y = 0
-		for i in range(self.display_surface.get_height() // tile.TILESIZE + 1):
+		if globals.easter_egg:
+			self.display_surface.blit(globals.vader_img, (0,0))
+		else:
 			x = 0
-			for j in range(self.display_surface.get_width() // tile.TILESIZE):
-				self.display_surface.blit(self.ground_sprites[GROUND_MAP[i][j]], (x, y))
-				x += tile.TILESIZE
-			y += tile.TILESIZE
+			y = 0
+			for i in range(self.display_surface.get_height() // tile.TILESIZE + 1):
+				x = 0
+				for j in range(self.display_surface.get_width() // tile.TILESIZE + 1):
+					self.display_surface.blit(self.ground_sprites[GROUND_MAP[i][j]], (x, y))
+					x += tile.TILESIZE
+				y += tile.TILESIZE
 
 	def create_ground(self):
 		for i in range(self.display_surface.get_height() // tile.TILESIZE + 1):
 			GROUND_MAP.append([])
-			for j in range(self.display_surface.get_width() // tile.TILESIZE):
+			for j in range(self.display_surface.get_width() // tile.TILESIZE + 1):
 				GROUND_MAP[i].append(random.randint(0, len(self.ground_sprites) - 1))

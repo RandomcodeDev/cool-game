@@ -59,7 +59,7 @@ class game:
 
 		self.fullscreen = False
 
-		self.surface = pygame.Surface((self.fullscreen_width, self.fullscreen_height))
+		self.surface = pygame.Surface((1920, 1080))
 
 		pygame.display.set_caption("Shitty Game")
 		self.clock = pygame.time.Clock()
@@ -139,5 +139,7 @@ if __name__ == "__main__":
 			)
 
 	globals.tiles.create_ground()
+	
+	globals.vader_img = pygame.image.load("assets/textures/vader.png")
 
 	globals.game.run()
