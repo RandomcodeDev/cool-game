@@ -61,7 +61,7 @@ class game:
 
 		self.surface = pygame.Surface((1920, 1080))
 
-		pygame.display.set_caption("Shitty Game")
+		pygame.display.set_caption("Cool Game")
 		self.clock = pygame.time.Clock()
 		self.fps = 0
 
@@ -120,6 +120,8 @@ class game:
 			globals.player.input()
 			globals.player.draw_player()
 
+			globals.game.surface.blit(globals.animtest.frame(16), (0, 0))
+
 			self.blit_draw()
 
 			pygame.display.update()
@@ -137,6 +139,9 @@ if __name__ == "__main__":
 	globals.tiles = tile(
 				WORLD_MAP, "assets/textures/tiles.png"
 			)
+
+	globals.animtest_frames = sprite_sheet("assets/textures/animtest.png")
+	globals.animtest = animation(globals.animtest_frames, 0.1)
 
 	globals.tiles.create_ground()
 	
